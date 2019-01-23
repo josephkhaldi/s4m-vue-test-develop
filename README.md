@@ -5,11 +5,11 @@
 ### What is the purpose of this component:
 
 #### Level 1
-- It should be able to receive an `options` property and use it to initialize the multiselect's list
-- It should be able to select one or multiple elements of the list and display it has tags
-- It should be able to delete one or multiple tags
-- It should trigger a close, open, select and delete event
-- Items already selected should be removed from the list
+<!-- - It should be able to receive an `options` property and use it to initialize the multiselect's list -->
+<!-- - It should be able to select one or multiple elements of the list and display it has tags -->
+<!-- - It should be able to delete one or multiple tags -->
+<!-- - It should trigger a close, open, select and delete event -->
+<!-- - Items already selected should be removed from the list -->
 
 #### Level 2
 - It should display a search input and filter the options list with the user's input (key: name|label)

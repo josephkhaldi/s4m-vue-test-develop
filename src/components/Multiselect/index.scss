@@ -1,5 +1,107 @@
+@import "../../assets/css/general.scss";
+.m-t-6{
+  margin-top: 6px;
+}
 .multiselect {
+  &__content-wrapper{
+    display: flex;
+    flex-direction: column; 
+  }
   &__input {
-    
+    box-sizing: border-box;
+    border: 0;
+    padding: 15px;
+    width:100%;
+    @include borderc();
+    &:focus{
+      outline: none;    
+    }
+  }
+  &__search{
+    color: $dark-grey;  
+  }    
+  &__selection{
+    position:relative;
+    min-height: 33px;
+    border-radius: 10px;   
+    padding: 0 15px 10px;
+    @include bgc($white);
+    @include borderc();
+    text-align: left;
+    &.active{
+      border-radius: 10px 10px 0 0;
+    }
+    &__tag{
+      color: $white;
+      padding: 8px 5px;
+      display: inline-block;
+      border-radius: 8px;
+      @include bgc($blue);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .4s;
+      margin-right: 15px;
+      margin-top: 10px;
+      &:hover{
+        @include bgc($red);
+      } 
+      span{
+        svg{
+          fill: white;
+          width: 7px;
+          margin-left: 5px;
+          padding: 0 6px;
+          display: inline-block;
+        }
+      }
+      &--empty{
+        color: $dark-grey;
+        @include bgc($white);
+      }
+    }  
+    > svg{
+      position: absolute;
+      right: 15px;
+      top: 18px;
+      fill: $dark-grey;      
+    }
+  }  
+  &__list__container{
+    text-align: left;
+    padding: 0;
+    margin: 0 0 50px;
+    list-style: none;
+    border-radius: 0 0 10px 10px;
+    @include borderc();
+    &__element{
+      position: relative;
+      @include bgc($white);
+      padding: 10px;
+      cursor: pointer;
+      transition: all .4s;
+      &:hover{
+        @include bgc($blue);
+        color: $white;
+      }
+      span{
+        opacity: .5;
+        display: block;
+        font-size: 12px;
+      }
+      svg{
+        position: absolute;
+        fill: $white;
+        right: 18px;
+        top: 15px;
+        width: 22px;
+        height: 22px;
+      }
+      &:last-child{
+        border-radius: 0 0 10px 10px;
+      }
+    }
+  }
+  &:focus{
+    outline: none;    
   }
 }
