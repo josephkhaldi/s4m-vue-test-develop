@@ -1,9 +1,5 @@
 export default ({
   name: 'Multiselect',
-  props: {
-    list: Array,
-    options: Array,   
-  },
   methods: {   
     openMultiselect: function(e){
       this.isOpen = true;
@@ -16,15 +12,15 @@ export default ({
       this.stopNavigation();    
     },
     addItem: function(item){
-      this.selectedItems.push(item);
-      const indexItem = this.list.indexOf(item);
-      this.list.splice(indexItem, 1);
+      this.$store.dispatch('setSeletedUsers', item);
+      const indexItem = this.getList.indexOf(item);
+      this.getList.splice(indexItem, 1);
       this.$emit('Add Item To Select', item); 
     },
     removeItem: function(item){
-      const indexItem = this.selectedItems.indexOf(item);
-      this.selectedItems.splice(indexItem, 1);
-      this.list.push(item);
+      const indexItem = this.selectedList.indexOf(item);
+      this.$store.dispatch('removeSeletedUsers', indexItem);
+      this.getList.push(item);
       this.$emit('Remove Item To Select', item); 
     },
     isEmpty: function(el){
@@ -60,6 +56,7 @@ export default ({
     },
     onEnter: function(){
       this.addItem(this.filterList[this.navigationPosition])
+      this.navigationPosition= 0;
     },
     // autofill search input when tab is pressed
     autofillSearch: function(){
@@ -69,6 +66,15 @@ export default ({
     }   
   },
   computed: {
+    list() {
+      return this.$store.state.users.users;
+    },
+    options() {     
+      return this.$store.state.options.options;
+    },
+    selectedList() {
+      return this.$store.state.selectedUsers.selectedUsers;
+    },
     // if options isn't empty we use it over list
     getList: function(){
       return (this.options.length > 0) ? this.options : this.list;
@@ -85,7 +91,6 @@ export default ({
   data() {
     return {
       isOpen: false,
-      selectedItems: [],
       search: '',
       navigationPosition: 0,
     };

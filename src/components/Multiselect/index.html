@@ -1,58 +1,57 @@
 <div class="container">
+  <h1>Multiselect</h1>
   <div 
     class="multiselect"  
     @focus="openMultiselect"
     @blur="closeMultiselect"
     tabindex="-1" 
   >
-    <div class="multiselect__content-wrapper">
+    <div 
+      class="multiselect__selection"        
+      v-bind:class="{ active : isOpen }"
+    >
       <div 
-        class="multiselect__selection"        
-        v-bind:class="{ active : isOpen }"
+        class="multiselect__selection__tag" 
+        v-for="selectedItem in selectedList" 
+        @click="removeItem(selectedItem)" 
+        @key="selectedItem.id"
       >
-        <div 
-          class="multiselect__selection__tag" 
-          v-for="selectedItem in selectedItems" 
-          @click="removeItem(selectedItem)" 
-          @key="selectedItem.id"
-        >
-          {{selectedItem.name}}
-          <span>
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
-              <path d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
-            </svg>
-          </span>
-        </div>
-        <div v-show="isEmpty(selectedItems)" class="multiselect__selection__tag multiselect__selection__tag--empty">Select ...</div> 
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
-          <path d="M15.504 13.616l-3.79-3.223c-0.392-0.353-0.811-0.514-1.149-0.499 0.895-1.048 1.435-2.407 1.435-3.893 0-3.314-2.686-6-6-6s-6 2.686-6 6 2.686 6 6 6c1.486 0 2.845-0.54 3.893-1.435-0.016 0.338 0.146 0.757 0.499 1.149l3.223 3.79c0.552 0.613 1.453 0.665 2.003 0.115s0.498-1.452-0.115-2.003zM6 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"></path>
-        </svg>
+        {{selectedItem.name}}
+        <span>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+            <path d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
+          </svg>
+        </span>
       </div>
-      <div class="multiselect__search" v-show="isOpen"> 
-        <input 
-          class="multiselect__input" 
-          placeholder="Type your search ..." 
-          @focus="openMultiselect" 
-          v-model="search" 
-          v-on:keydown.tab.prevent="autofillSearch"
-        />
-        <ul class="multiselect__list__container">
-          <li 
-            v-for="(item, index) in filterList" 
-            @key="item.id"
-            @click="addItem(item)"
-            class="multiselect__list__container__element"
-            :class='{"active": navigationPosition === index}'
-          >
-            {{ item.name }}
-            <span>{{ item.username }}</span> 
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
-              <path d="M15.5 6h-5.5v-5.5c0-0.276-0.224-0.5-0.5-0.5h-3c-0.276 0-0.5 0.224-0.5 0.5v5.5h-5.5c-0.276 0-0.5 0.224-0.5 0.5v3c0 0.276 0.224 0.5 0.5 0.5h5.5v5.5c0 0.276 0.224 0.5 0.5 0.5h3c0.276 0 0.5-0.224 0.5-0.5v-5.5h5.5c0.276 0 0.5-0.224 0.5-0.5v-3c0-0.276-0.224-0.5-0.5-0.5z"></path>
-            </svg>
-          </li>
-          <li v-show="isEmpty(list)">The list is empty :(</li>        
-        </ul>      
-      </div>
+      <div v-show="isEmpty(selectedList)" class="multiselect__selection__tag multiselect__selection__tag--empty">Select ...</div> 
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+        <path d="M15.504 13.616l-3.79-3.223c-0.392-0.353-0.811-0.514-1.149-0.499 0.895-1.048 1.435-2.407 1.435-3.893 0-3.314-2.686-6-6-6s-6 2.686-6 6 2.686 6 6 6c1.486 0 2.845-0.54 3.893-1.435-0.016 0.338 0.146 0.757 0.499 1.149l3.223 3.79c0.552 0.613 1.453 0.665 2.003 0.115s0.498-1.452-0.115-2.003zM6 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"></path>
+      </svg>
     </div>
+    <div class="multiselect__search" v-show="isOpen"> 
+      <input 
+        class="multiselect__input" 
+        placeholder="Type your search ..." 
+        @focus="openMultiselect" 
+        v-model="search" 
+        v-on:keydown.tab.prevent="autofillSearch"
+      />
+      <ul class="multiselect__list__container">
+        <li 
+          v-for="(item, index) in filterList" 
+          @key="item.id"
+          @click="addItem(item)"
+          class="multiselect__list__container__element"
+          :class='{"active": navigationPosition === index}'
+        >
+          {{ item.name }}
+          <span>{{ item.username }}</span> 
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+            <path d="M15.5 6h-5.5v-5.5c0-0.276-0.224-0.5-0.5-0.5h-3c-0.276 0-0.5 0.224-0.5 0.5v5.5h-5.5c-0.276 0-0.5 0.224-0.5 0.5v3c0 0.276 0.224 0.5 0.5 0.5h5.5v5.5c0 0.276 0.224 0.5 0.5 0.5h3c0.276 0 0.5-0.224 0.5-0.5v-5.5h5.5c0.276 0 0.5-0.224 0.5-0.5v-3c0-0.276-0.224-0.5-0.5-0.5z"></path>
+          </svg>
+        </li>              
+      </ul>    
+      <div v-show="isEmpty(filterList)">The list is empty :(</div>    
+    </div>   
   </div>
 </div>

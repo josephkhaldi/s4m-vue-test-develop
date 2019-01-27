@@ -1,16 +1,22 @@
 <template>
-  <div id="app">    
-    <Multiselect v-bind:list="users" v-bind:options="options"></Multiselect>
+  <div id="app">  
+    <nav>
+      <router-link to="/">Multi</router-link>
+      <router-link to="/Admin">Admin</router-link>    
+   </nav>
+   <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Multiselect from './components/Multiselect/Multiselect.vue';
+import Admin from './components/Admin/Admin.vue';
 
 export default {
   name: 'app',
   components: {
     Multiselect,
+    Admin
   },
   computed: {
     users() {
@@ -19,13 +25,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('get:users');
-  },
-  data : function(){
-    let options = [{ id : '1337', name : 'test', username : 'pseudoTest'}];    
-    options = []    
-    return {
-      options
-    }
   }
 };
 </script>

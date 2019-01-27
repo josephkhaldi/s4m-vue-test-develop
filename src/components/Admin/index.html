@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Admin</h1>
+  <form class="admin" @submit.prevent="saveItem">
+    <p>Choose an item to edit</p>
+    <ul class="admin__elements">
+      <li 
+        v-for="item in list" 
+        @click="selectItemToEdit(item)" 
+        :key="item.id"
+      >
+        {{ item.name }}
+      </li>
+    </ul>
+    <div class="err" v-for="error in errors">{{ error }}</div>
+    <div class="err" v-for="error in errors">{{ error }}</div>
+    <textarea class="admin__textarea" ref="dataEdit" v-show="showEdit" v-bind:class="{'err': hasError()}">
+    </textarea>
+    <div class="admin__save" v-show="showEdit">
+      <button type="submit" >Save</button>
+    </div>
+  </form>
+</div>

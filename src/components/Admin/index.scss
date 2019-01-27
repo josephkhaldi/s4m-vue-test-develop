@@ -1,0 +1,49 @@
+@import "../../assets/css/general.scss";
+
+.admin {
+    &__textarea{
+        width: 100%;
+        min-height: 150px;
+        border-radius: 10px;
+    }
+    &__elements{
+        list-style: none;
+        li{
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            @include bgc($white);
+            padding: 10px;
+            cursor: pointer;
+            transition: all .4s;
+            &:hover{                
+                @include bgc($blue);
+                color: $white;
+            }
+        }
+    }
+    &__save{
+        width: 100%;
+        padding: 20px;
+        position:fixed;
+        left: 0;
+        bottom: 0;
+        @include bgc(rgba(0,0,0,.4));
+        button{
+            @include bgc($blue);
+            color: $white;
+            border: 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.6rem;
+            transition: all .4s;
+            &:hover{
+                @include bgc(lighten($blue, 5%));
+            }
+        }
+    }
+    .err{
+        color : $red;
+    }
+}
